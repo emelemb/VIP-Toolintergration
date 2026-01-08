@@ -1,0 +1,46 @@
+{
+  "start": ["npc_gingerbread4_root"],
+  "nodes": [
+    {
+      "id": "npc_gingerbread4_root",
+      "speaker": "narrator",
+      "text": "A gingerbread approches you, their face expression looks off. Wonder what is going on. ",
+      "choices": [
+        { "id": "c1", "text": "chat", "gotoNode": "npc_gingerbread4_chat" },
+        { "id": "c2", "text": "Seek for information", "gotoNode": "npc_gingerbread4_seek" },
+        { "id": "c3", "text": "Ignore him", "gotoNode": "npc_gingerbread4_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread4_chat",
+      "speaker": "gingerbread",
+      "text": "Hhhh..hi, I would like to make a bet. ",
+      "choices": [
+        { "id": "c1", "text": "Seek for information", "gotoNode": "npc_gingerbread4_seek" },
+        { "id": "c2", "text": "Ignore him", "gotoNode": "npc_gingerbread4_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread4_seek",
+      "speaker": "player",
+      "text": "You look like you know something lil guy. Care to spill it out?  ",
+      "choices": [
+        { "id": "c1", "text": "Ask for information", "action": "SEEK_INFO", "successChance": 1, "gotoOnSuccess": "npc_gingerbread4_success" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread4_success",
+      "speaker": "gingerbread",
+      "text": "Something big is going to happen at today's match. Better keep your eyes and ears open. ",
+      "choices": [
+        { "id": "c1", "text": "Leave", "gotoNode": "npc_gingerbread4_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread4_end",
+      "speaker": "narrator",
+      "text": "The gingerbread quicken their pace as if they are fleeing from something. ",
+      "choices": []
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "start": ["npc_gingerbread1_root"],
+  "nodes": [
+    {
+      "id": "npc_gingerbread1_root",
+      "speaker": "narrator",
+      "text": "You see all the gingerbread people in line ready to gamble away their chocolate chips. Nature is healing.",
+      "choices": [
+        { "id": "c1", "text": "Chat", "gotoNode": "npc_gingerbread1_chat" },
+        { "id": "c2", "text": "Seek for information", "gotoNode": "npc_gingerbread1_seek" },
+        { "id": "c3", "text": "Ignore him", "gotoNode": "npc_gingerbread1_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread1_chat",
+      "speaker": "gingerbread",
+      "text": "I can already feel the sweet taste of victory.",
+      "choices": [
+        { "id": "c1", "text": "Seek for information", "gotoNode": "npc_gingerbread1_seek" },
+        { "id": "c2", "text": "Ignore him", "gotoNode": "npc_gingerbread1_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread1_seek",
+      "speaker": "player",
+      "text": "It’s 5 o’clock, time to spill the tea. Have you got something?",
+      "choices": [
+        { "id": "c1", "text": "Ask for information", "action": "SEEK_INFO", "successChance": 1, "gotoOnSuccess": "npc_gingerbread1_success" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread1_success",
+      "speaker": "gingerbread",
+      "text": "Did you know that {fighterA} is a fraud because I have heard rumours that they getting expired and you can see some mold on their body. ",
+      "choices": [
+        { "id": "c1", "text": "Leave", "gotoNode": "npc_gingerbread1_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread1_end",
+      "speaker": "narrator",
+      "text": "The gingerbread gambler returns to mumbling to himself.",
+      "choices": []
+    }
+  ]
+}

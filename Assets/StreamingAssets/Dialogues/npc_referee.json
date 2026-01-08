@@ -1,0 +1,82 @@
+{
+  "start": ["npc_referee_root"],
+  "nodes": [
+    {
+      "id": "npc_referee_root",
+      "speaker": "narrator",
+      "text": "There he is, the famous referee, Cannoloco. They say he’s the toughest cookie in the oven. Better approach him carefully, or you might end up in deep dough.",
+      "choices": [
+        { "id": "c1", "text": "chat", "gotoNode": "npc_referee_chat" },
+        { "id": "c2", "text": "Seek information", "gotoNode": "npc_referee_seek" },
+        { "id": "c3", "text": "Bribe (Try your luck)", "gotoNode": "npc_referee_bribe" },
+        { "id": "c4", "text": "Leave", "gotoNode": "npc_referee_end" }
+      ]
+    },
+        {
+      "id": "npc_referee_chat",
+      "speaker": "referee",
+      "text": "Mi compá, are you excited for the match? Top notch fighter, straight from the hot tray. ",
+      "choices": [
+        { "id": "c1", "text": "Seek information", "gotoNode": "npc_referee_seek" },
+        { "id": "c2", "text": "Bribe (Try your luck)", "gotoNode": "npc_referee_bribe" },
+        { "id": "c3", "text": "Leave", "gotoNode": "npc_referee_end" }
+      ]
+    },
+    {
+      "id": "npc_referee_seek",
+      "speaker": "player",
+      "text": "I’m dough-lighted to see you, and of course I'm excited for the match! Now let’s talk business, shall we?",
+      "choices": [
+        { "id": "c1", "text": "Ask for information", "action": "SEEK_INFO", "successChance": 0.4, "gotoOnSuccess": "npc_referee_seek_success", "gotoOnFail": "npc_referee_seek_fail" },
+        { "id": "c2", "text": "Leave", "gotoNode": "npc_referee_end" }
+      ]
+    },
+    {
+      "id": "npc_referee_seek_success",
+      "speaker": "referee",
+      "text": "Alright, I'm going to be real with you because what I'm about to say can only be betweeen us. {fighterA} and {fighterB} are planning to rig this fight because both are in need of chips for their...let's say certain addictive powder. ",
+      "choices": [
+        { "id": "c1", "text": "Leave", "gotoNode": "npc_referee_end" }
+      ]
+    },
+    {
+      "id": "npc_referee_seek_fail",
+      "speaker": "referee",
+      "text": "You think you butter me up? I’ve blown whistles for bigger dough boys than you.",
+      "choices": [
+        { "id": "c1", "text": "End chat", "gotoNode": "npc_referee_end" }
+      ]
+    },
+    {
+      "id": "npc_referee_bribe",
+      "speaker": "player",
+      "text": "You looking abit rough lately, think I have exacly what you need. ",
+      "choices": [
+        { "id": "c1", "text": "Bribe him", "action": "BRIBE", "successChance": 0.4, "gotoOnSuccess": "npc_referee_bribe_success", "gotoOnFail": "npc_referee_bribe_fail" },
+        { "id": "c2", "text": "Nevermind", "gotoNode": "npc_referee_end" }
+      ]
+    },
+    {
+      "id": "npc_referee_bribe_success",
+      "speaker": "referee",
+      "text": "You got me there, and I'm going to be honest with you. Life is a bit rough right now so I could use some. ",
+      "choices": [
+        { "id": "c1", "text": "Leave ", "gotoNode": "npc_referee_end" }
+      ]
+    },
+    {
+      "id": "npc_referee_bribe_fail",
+      "speaker": "referee",
+      "text": "Well, would you look at that. I was fooling around and here you are trying to butter me up. ",
+      "choices": [
+        { "id": "c1", "text": "Awkwardly end chat", "gotoNode": "npc_referee_end" }
+      ]
+    },
+    {
+      "id": "npc_referee_end",
+      "speaker": "narrator",
+      "text": "The referee leaves ",
+      "choices": []
+    }
+  ]
+}

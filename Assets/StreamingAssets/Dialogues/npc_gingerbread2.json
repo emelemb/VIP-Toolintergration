@@ -1,0 +1,46 @@
+{
+  "start": ["npc_gingerbread2_root"],
+  "nodes": [
+    {
+      "id": "npc_gingerbread2_root",
+      "speaker": "narrator",
+      "text": "Another customer is approaching. They think so little when it comes to spending their chips you’d think they’re freshly baked. ",
+      "choices": [
+        { "id": "c1", "text": "chat", "gotoNode": "npc_gingerbread2_chat" },
+        { "id": "c2", "text": "Seek for information", "gotoNode": "npc_gingerbread2_seek" },
+        { "id": "c3", "text": "Ignore him", "gotoNode": "npc_gingerbread2_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread2_chat",
+      "speaker": "gingerbread",
+      "text": "My finances are crumbling exactly like an extra soft cookie. ",
+      "choices": [
+        { "id": "c1", "text": "Seek for information", "gotoNode": "npc_gingerbread2_seek" },
+        { "id": "c2", "text": "Ignore him", "gotoNode": "npc_gingerbread2_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread2_seek",
+      "speaker": "player",
+      "text": "Excellent bet my guy. Your skills are sharper than the edges of cookie cutter. Would someone so smart like you happen to know anything circulating around? ",
+      "choices": [
+        { "id": "c1", "text": "Ask for information", "action": "SEEK_INFO", "successChance": 1, "gotoOnSuccess": "npc_gingerbread2_success" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread2_success",
+      "speaker": "gingerbread",
+      "text": "I have heard that {fighterA} is going to inject certain subatance (flour) before the match with {fighterB}.  ",
+      "choices": [
+        { "id": "c1", "text": "Leave", "gotoNode": "npc_gingerbread2_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread2_end",
+      "speaker": "narrator",
+      "text": "There goes another satisfied customers. ",
+      "choices": []
+    }
+  ]
+}

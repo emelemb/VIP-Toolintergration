@@ -1,0 +1,28 @@
+{
+"start": ["random_chips_event_root"],
+"nodes": [
+  {
+    "id": "random_chips_event_root",
+    "speaker": "narrator",
+    "text": "There are some chips on the ground that catches your eyes, better pick them up quick before someone else take it. ",
+    "choices": [
+      {"id": "c1", "text": "Pick it up", "action": "PICKUP_CHIPS", "gotoNode": "random_chips_event_pickup" },
+      {"id": "c2", "text": "Ignore it", "gotoNode": "random_chips_event_end" }
+    ]
+  },
+  {
+    "id": "random_chips_event_pickup",
+    "speaker": "player",
+    "text": "Lucky me! ",
+    "choices":[]
+  },
+  {
+    "id": "random_chips_event_ignore",
+    "speaker": "narrator",
+    "text": "Apparently, the player seems to be blind or missclicked the correct choice. Oh well. ",
+    "choices":[]
+  }
+  
+]
+
+}

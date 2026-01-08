@@ -1,0 +1,48 @@
+{
+  "start": ["npc_dealer_root"],
+  "nodes": [
+    {
+      "id": "npc_dealer_root",
+      "speaker": "narrator",
+      "text": "You see a suspicious-looking fortune cookie standing in line. Who knows what message this peculiar dessert can bring you.",
+      "choices": [
+        { "id": "c1", "text": "Talk to the fortune cookie", "gotoNode": "npc_dealer_intro" },
+        { "id": "c2", "text": "Leave", "gotoNode": "npc_dealer_end" }
+      ]
+    },
+    {
+      "id": "npc_dealer_intro",
+      "speaker": "fortune cookie",
+      "text": "Psss kid. Listen, you’re surrounded by all these sugary desserts, they’re gonna give you a sugar addiction. Why not skip straight to the last part? I got the right thing for you. Baking flour.",
+      "choices": [
+        { "id": "c1", "text": "Ask what kind of flour", "gotoNode": "npc_dealer_flour_offer" },
+        { "id": "c2", "text": "No thanks", "gotoNode": "npc_dealer_end" }
+      ]
+    },
+    {
+      "id": "npc_dealer_flour_offer",
+      "speaker": "fortune cookie",
+      "text": "I got whachu need. Hand over the chips.",
+      "choices": [
+        { "id": "c1", "text": "Buy flour", "gotoNode": "npc_dealer_buy_success" },
+        { "id": "c2", "text": "Leave", "gotoNode": "npc_dealer_end" }
+      ]
+    },
+    {
+      "id": "npc_dealer_buy_success",
+      "speaker": "fortune cookie",
+      "text": "Pleasure doin’ business. Don’t overdose on carbs, kid.",
+      "action": "buy_flour",
+      "amount": 20,
+      "choices": [
+        { "id": "c1", "text": "Leave", "gotoNode": "npc_dealer_end" }
+      ]
+    },
+    {
+      "id": "npc_dealer_end",
+      "speaker": "narrator",
+      "text": "The strange fortune cookie leaves.",
+      "choices": []
+    }
+  ]
+}

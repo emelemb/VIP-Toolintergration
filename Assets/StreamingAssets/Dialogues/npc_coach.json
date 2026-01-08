@@ -1,0 +1,82 @@
+{
+  "start": ["npc_coach_root"],
+  "nodes": [
+    {
+      "id": "npc_coach_root",
+      "speaker": "narrator",
+      "text": "One of the coaches is approaching you, maybe they're here to check the stats… oh, they're here to gamble. That checks out.",
+      "choices": [
+        { "id": "c1", "text": "Talk to the coach", "gotoNode": "npc_coach_intro" },
+        { "id": "c2", "text": "Ask for information", "gotoNode": "npc_coach_seek" },
+        { "id": "c3", "text": "Offer a bribe", "gotoNode": "npc_coach_bribe" },
+        { "id": "c4", "text": "Leave", "gotoNode": "npc_coach_end" }
+      ]
+    },
+    {
+      "id": "npc_coach_intro",
+      "speaker": "coach",
+      "text": "Every coach knows that the best way to support your fighter is through gambling. It shows an unbreakable bond. By that I mean I'll break their bones if they lose.",
+      "choices": [
+        { "id": "c1", "text": "Seek for information", "gotoNode": "npc_coach_seek" },
+        { "id": "c2", "text": "Offer a bribe", "gotoNode": "npc_coach_bribe" },
+        { "id": "c3", "text": "Leave", "gotoNode": "npc_coach_end" }
+      ]
+    },
+    {
+      "id": "npc_coach_seek",
+      "speaker": "player",
+      "text": "They say knowledge means power, and money also means power… by the law of commutativity, knowledge must mean money.",
+      "choices": [
+        { "id": "c1", "text": "Ask for information", "action": "SEEK_INFO", "successChance": 0.6, "gotoOnSuccess": "npc_coach_seek_success", "gotoOnFail": "npc_coach_seek_fail" },
+        { "id": "c2", "text": "Leave", "gotoNode": "npc_coach_end" }
+      ]
+    },
+    {
+      "id": "npc_coach_seek_success",
+      "speaker": "coach",
+      "text": "Alright, alright. I've been around long enough to know a thing or two, so I'm only going to say this once. I have heard that {fighterB} used to be a troublemaker but I do not know the details so you going to have to look around for more information. ",
+      "choices": [
+        { "id": "c1", "text": "Thank you", "gotoNode": "npc_coach_end" }
+      ]
+    },
+    {
+      "id": "npc_coach_seek_fail",
+      "speaker": "coach",
+      "text": "Boy, you think I started baking yesterday? I see right through your dirty little scheme…",
+      "choices": [
+        { "id": "c1", "text": "Apologize", "gotoNode": "npc_coach_end" }
+      ]
+    },
+    {
+      "id": "npc_coach_bribe",
+      "speaker": "player",
+      "text": "It would be such a shame if, let's say, they found something in the lockers. Indeed a great shame that might require… financial compensation.",
+      "choices": [
+        { "id": "c1", "text": "Offer flour as payment", "action": "BRIBE", "successChance": 0.7, "gotoOnSuccess": "npc_coach_bribe_success", "gotoOnFail": "npc_coach_bribe_fail" },
+        { "id": "c2", "text": "Nevermind", "gotoNode": "npc_coach_end" }
+      ]
+    },
+    {
+      "id": "npc_coach_bribe_success",
+      "speaker": "coach",
+      "text": "Interesting. I see what you want me to do, kid. If you've got the chips, I'll do it.",
+      "choices": [
+        { "id": "c1", "text": "Thank him", "gotoNode": "npc_coach_end" }
+      ]
+    },
+    {
+      "id": "npc_coach_bribe_fail",
+      "speaker": "coach",
+      "text": "You want me to betray my fighter? Unacceptable! The only suspicious white powder they're gonna find is my homemade protein!",
+      "choices": [
+        { "id": "c1", "text": "Back off quickly", "gotoNode": "npc_coach_end" }
+      ]
+    },
+    {
+      "id": "npc_coach_end",
+      "speaker": "narrator",
+      "text": "You leave the coach to his protein shake and poor life choices.",
+      "choices": []
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "start": ["npc_gingerbread3_root"],
+  "nodes": [
+    {
+      "id": "npc_gingerbread3_root",
+      "speaker": "narrator",
+      "text": "Busy as always. Let’s roll the chocolate chips. ",
+      "choices": [
+        { "id": "c1", "text": "chat", "gotoNode": "npc_gingerbread3_chat" },
+        { "id": "c2", "text": "Seek for information", "gotoNode": "npc_gingerbread3_seek" },
+        { "id": "c3", "text": "Ignore him", "gotoNode": "npc_gingerbread3_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread3_chat",
+      "speaker": "gingerbread",
+      "text": "I eat excessive amounts of sugar to cope with the fact that my wife left me and took the kids because of my gambling addiction. So as I was saying, I would like to place a bet... ",
+      "choices": [
+        { "id": "c1", "text": "Seek for information", "gotoNode": "npc_gingerbread3_seek" },
+        { "id": "c2", "text": "Ignore him", "gotoNode": "npc_gingerbread3_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread3_seek",
+      "speaker": "player",
+      "text": "One of them desserts smells a bit fishy, don't you think? You wouldn’t happen to hear something ‘bout this? ",
+      "choices": [
+        { "id": "c1", "text": "Ask for information", "action": "SEEK_INFO", "successChance": 1, "gotoOnSuccess": "npc_gingerbread3_success" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread3_success",
+      "speaker": "gingerbread",
+      "text": "I do not know how true this is but there has been gossip about {fighterB}. They say there is something fishy about him but that is all I know.  ",
+      "choices": [
+        { "id": "c1", "text": "Leave", "gotoNode": "npc_gingerbread3_end" }
+      ]
+    },
+    {
+      "id": "npc_gingerbread3_end",
+      "speaker": "narrator",
+      "text": "They left you alone. ",
+      "choices": []
+    }
+  ]
+}
