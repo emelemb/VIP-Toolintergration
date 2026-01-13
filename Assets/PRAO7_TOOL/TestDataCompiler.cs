@@ -76,7 +76,7 @@ public class TestDataCompiler : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 mouseClicks++;  // add timer so we mabye dont take screenshots EVERYTIME  have it only be able to trigger like once every 2 sec. 
-                ScreenCapture.CaptureScreenshot(Application.dataPath + toolFolderName + "Screenshot" + testNumber + ".jpeg", -1);
+                ScreenCapture.CaptureScreenshot(Application.dataPath + toolFolderName + "Screenshot" + testNumber + ".jpeg", 1);
                 testNumber++;
             }
         }
