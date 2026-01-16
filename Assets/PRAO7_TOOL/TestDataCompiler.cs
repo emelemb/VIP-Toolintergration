@@ -1,8 +1,19 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
+
+
+class DayLogInfo
+{
+    public int dayNumber;
+    public int timesClicked;
+    public float timeActive;
+}
 
 public class TestDataCompiler : MonoBehaviour
 {
@@ -12,6 +23,10 @@ public class TestDataCompiler : MonoBehaviour
     int testNumber;
     string toolFolderName = "";
     float recordingTime;
+    private bool isFirstTimeQueueing;
+    List<DayLogInfo> dayLogs;
+    GameManager.GameDay day;
+    private int currentDay;
 
     public bool missionAccomplished
     {
@@ -28,7 +43,13 @@ public class TestDataCompiler : MonoBehaviour
         using (StreamWriter writer = new StreamWriter(path))
         {
             //writer.WriteLine("Day: " + StringLiterals.MAIN_SCENE.ToString().Replace("Day", string.Empty));
-            writer.WriteLine($"Time:{recordingTime} s, Clicks:{mouseClicks}");
+            writer.WriteLine($"Total Time:{recordingTime} s, Total Clicks:{mouseClicks}\n");
+
+
+            foreach (DayLogInfo dayLog in dayLogs)
+            {
+                writer.WriteLine($"Day {dayLog.dayNumber}, Times Clicked:{dayLog.timesClicked}, Time Active:{dayLog.timeActive}\n");
+            }
 
             //for (int i = 0; i < TestAnalytics.Instance.allLists.Count; i++)
             //{
@@ -51,20 +72,42 @@ public class TestDataCompiler : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        isFirstTimeQueueing = true;
+        dayLogs = new List<DayLogInfo>();
     }
 
     void Update()
     {
-      
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("CharacterTest") && isFirstTimeQueueing)
+        {
+            day = GameManager.Instance.Day;
+            currentDay = 0;
+            DayLogInfo logInfo = new DayLogInfo();
+            logInfo.dayNumber = currentDay;
+            dayLogs.Add(logInfo);
+            isFirstTimeQueueing = false;
+        }
+        else
+        {
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("CharacterTest") && day != GameManager.Instance.Day && !isFirstTimeQueueing)
+            {
+                day = GameManager.Instance.Day;
+                currentDay++;
+                DayLogInfo logInfo = new DayLogInfo();
+                logInfo.dayNumber = currentDay;
+                dayLogs.Add(logInfo);
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (!toolON)
             {
                 StartTesting();
             }
-            if (toolON) 
+            if (toolON)
             {
-             
+
                 ExportStatsToCSV();
             }
             toolON = !toolON;
@@ -72,10 +115,18 @@ public class TestDataCompiler : MonoBehaviour
 
         if (toolON)
         {
-            recordingTime += Time.deltaTime;
+            recordingTime += Time.deltaTime; // now total time
+            if (!isFirstTimeQueueing)
+            {
+            dayLogs[dayLogs.Count - 1].timeActive += Time.deltaTime; // per day time
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 mouseClicks++;  // add timer so we mabye dont take screenshots EVERYTIME  have it only be able to trigger like once every 2 sec. 
+                if (!isFirstTimeQueueing)
+                {
+                dayLogs[dayLogs.Count - 1].timesClicked++; // per day clicks
+                }
                 ScreenCapture.CaptureScreenshot(Application.dataPath + toolFolderName + "Screenshot" + testNumber + ".jpeg", 1);
                 testNumber++;
             }
